@@ -1,0 +1,7 @@
+programme hello {
+    entier x ;
+    entier y ;
+
+    y := 98 ;
+    x := 2 ;
+}

@@ -1,0 +1,10 @@
+programme calc {
+    entier x ;
+
+    x := ( ( 1 +
+           ( w * 9 ) // = 0 si w = 0
+           )   * 3 )
+               - 2 ;
+
+    ecrire x ;
+}

@@ -1,0 +1,17 @@
+programme array {
+    tableau [ 3 ] tab ;
+    // On déclare un tableau (d'entiers ?) de taille 3.
+
+    pour i dans 0 .. 2 repeter {
+        entier x ;
+        // Un accumulateur pour l'input
+
+        lire x ; // On lit un nombre
+
+        tab [ i ] := x ;
+    }
+
+    ecrire tab [ 0 ] ; // Affiche la première valeur saisie par l'utilisateur
+    ecrire tab [ 2 ] ; // Affiche la troisième valeur saisie par l'utilisateur
+    ecrire tab [ 1 ] ; // Affiche la deuxième valeur saisie par l'utilisateur
+}
