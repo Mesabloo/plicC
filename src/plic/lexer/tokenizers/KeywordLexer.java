@@ -20,19 +20,16 @@ public class KeywordLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {
         return
-            (String_.string(keywords.get(0))
-                .orElse(String_.string(keywords.get(1)))
+            (String_.string("programme")
+                .orElse(String_.string("ecrire").try_())
+                .orElse(String_.string("entier"))
                 .orElse(Parseable.empty())
             )
+            .then_(Parseable.lookahead(Parseable.<Character, Reader>satisfy(Character::isSpace).void_()))
+            .try_()
             .bind(kw -> Parseable.<Character, Reader>lineNumber()
                 .fmap(line -> new KeywordToken(line, kw)))
             .fmap(t -> (Token) t)
             .parse(reader);
-    }
-
-    private static final ArrayList<String> keywords = new ArrayList<>();
-    static {
-        keywords.add("programme");
-        keywords.add("entier");
     }
 }
