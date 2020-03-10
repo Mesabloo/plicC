@@ -2,6 +2,7 @@ package plic.parser.ast;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 public class SymbolTable {
     public static class Key {
@@ -72,12 +73,14 @@ public class SymbolTable {
         this.symbols.remove(new Key(k));
     }
 
-    public DeclarationNode.Type getTypeOf(String identifier) {
-        return this.symbols.get(new Key(identifier)).type;
+    public Optional<DeclarationNode.Type> getTypeOf(String identifier) {
+        Entry e = this.symbols.get(new Key(identifier));
+        return e == null ? Optional.empty() : Optional.of(e.type);
     }
 
-    public long getOffsetOf(String identifier) {
-        return this.symbols.get(new Key(identifier)).off;
+    public Optional<Long> getOffsetOf(String identifier) {
+        Entry e = this.symbols.get(new Key(identifier));
+        return e == null ? Optional.empty() : Optional.of(e.off);
     }
 
     public static SymbolTable fromNodes(ArrayList<DeclarationNode> stts) {
