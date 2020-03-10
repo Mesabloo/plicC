@@ -15,11 +15,11 @@ public class BlockParsec implements Parsec<BlockNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, BlockNode>> apply(Reader reader) {
         return new SymbolParsec("{")
-            .then(new DeclarationParsec().many())
+            .then(new DeclarationParsec().try_().many())
             .bind(decls -> new InstructionParsec().try_().some()
                 .fmap(instrs -> {
                     ArrayList<TreeNode> stts = new ArrayList<>();
-                    stts.addAll(decls);
+                    // stts.addAll(decls);
                     stts.addAll(instrs);
                     return stts;
                 }))

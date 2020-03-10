@@ -32,4 +32,12 @@ public class DeclarationNode extends TreeNode {
         String prefix = super.toString_(level);
         return prefix + "let " + name + " : " + type.toString();
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Type getType() {
+        return this.type;
+    }
 }

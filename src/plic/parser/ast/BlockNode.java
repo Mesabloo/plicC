@@ -1,13 +1,17 @@
 package plic.parser.ast;
 
+import data.product.Product;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class BlockNode extends TreeNode {
+    private SymbolTable symbols;
     private ArrayList<TreeNode> statements;
 
-    public BlockNode(ArrayList<TreeNode> nodes) {
-        this.statements = nodes;
+    public BlockNode(Product<ArrayList<DeclarationNode>, ArrayList<TreeNode>> nodes) {
+        this.symbols = SymbolTable.fromNodes(nodes.fst);
+        this.statements = nodes.snd;
     }
 
     public ArrayList<TreeNode> toList() {
