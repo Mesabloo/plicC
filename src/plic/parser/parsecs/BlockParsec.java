@@ -17,12 +17,8 @@ public class BlockParsec implements Parsec<BlockNode> {
         return new SymbolParsec("{")
             .then(new DeclarationParsec().try_().many())
             .bind(decls -> new InstructionParsec().try_().some()
-                .fmap(instrs -> {
-                    ArrayList<TreeNode> stts = new ArrayList<>();
-                    // stts.addAll(decls);
-                    stts.addAll(instrs);
-                    return stts;
-                }))
+                .fmap(ArrayList<TreeNode>::new)
+                .fmap(instrs -> new Product<>(decls, instrs)))
             .fmap(BlockNode::new)
             .then_(new SymbolParsec("}"))
             .parse(reader);

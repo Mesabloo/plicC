@@ -11,8 +11,8 @@ import text.parser.combinators.error.ParseError;
 public class InstructionParsec implements Parsec<InstructionNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, InstructionNode>> apply(Reader reader) {
-        return new DefinitionParsec()
-            .fmap(def -> (InstructionNode) def)
+        return (new OutputParsec().fmap(def -> (InstructionNode) def))
+            .orElse(new DefinitionParsec().fmap(def -> (InstructionNode) def))
             .parse(reader);
     }
 }
