@@ -1,5 +1,8 @@
 package plic.lexer.token;
 
+/**
+ * A token representing an integer.
+ */
 public class IntegerToken extends Token {
     private long nb;
 

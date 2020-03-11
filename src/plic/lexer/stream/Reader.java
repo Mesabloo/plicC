@@ -12,6 +12,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The {@link Reader} class is a wrapper around a {@link Stream} of characters.
+ */
 public final class Reader implements Copiable<Reader>, Stream<Character> {
     // Underlying input stream from which we fetch characters.
     private ArrayList<Character> input;

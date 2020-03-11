@@ -9,6 +9,9 @@ import plic.parser.stream.Reader;
 import text.parser.combinators.Parseable;
 import text.parser.combinators.error.ParseError;
 
+/**
+ * Parses a given symbol.
+ */
 public class SymbolParsec implements Parsec<Void> {
     private String toFind;
 

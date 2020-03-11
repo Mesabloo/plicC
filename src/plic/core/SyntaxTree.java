@@ -1,4 +1,4 @@
-package plic.parser.ast;
+package plic.core;
 
 public class SyntaxTree {
     private TreeNode root;

@@ -3,6 +3,10 @@ package text.parser.combinators.error.item;
 import org.jetbrains.annotations.NotNull;
 import text.parser.combinators.error.ErrorItem;
 
+/**
+ * The EOF parse error item.
+ * @param <T>
+ */
 public class EOF<T> extends ErrorItem<T> {
     @Override
     public int compareTo(@NotNull ErrorItem<T> tErrorItem) {

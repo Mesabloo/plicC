@@ -1,9 +1,4 @@
-package plic.parser.ast;
-
-import data.either.Either;
-import data.product.Product;
-import plic.parser.Parsec;
-import plic.parser.stream.Reader;
+package plic.core;
 
 public class DeclarationNode extends InstructionNode {
     public enum Type {

@@ -4,9 +4,12 @@ import org.jetbrains.annotations.NotNull;
 import text.parser.combinators.error.ErrorItem;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * A token parse error item.
+ * @param <T>
+ */
 public class Tokens<T> extends ErrorItem<T> {
     @Override
     public int compareTo(@NotNull ErrorItem<T> tErrorItem) {

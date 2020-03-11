@@ -12,6 +12,9 @@ import text.parser.combinators.error.ParseError;
 
 import java.util.ArrayList;
 
+/**
+ * Matches a reserved symbol according to the grammar.
+ */
 public class SymbolLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {

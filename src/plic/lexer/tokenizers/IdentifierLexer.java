@@ -12,6 +12,9 @@ import text.parser.combinators.error.ParseError;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+/**
+ * Matches an identifier from the given grammar.
+ */
 public class IdentifierLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {

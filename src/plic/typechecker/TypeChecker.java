@@ -2,8 +2,8 @@ package plic.typechecker;
 
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.ProgramNode;
-import plic.parser.ast.SyntaxTree;
+import plic.core.ProgramNode;
+import plic.core.SyntaxTree;
 import plic.typechecker.checkers.TCProgram;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeCheckerError;

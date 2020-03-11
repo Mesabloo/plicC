@@ -4,11 +4,14 @@ import data.either.Either;
 import data.product.Product;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
-import plic.parser.ast.DeclarationNode;
+import plic.core.DeclarationNode;
 import plic.parser.stream.Reader;
 import text.parser.combinators.Parseable;
 import text.parser.combinators.error.ParseError;
 
+/**
+ * Parses a variable declaration according to the grammar.
+ */
 public class DeclarationParsec implements Parsec<DeclarationNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, DeclarationNode>> apply(Reader reader) {

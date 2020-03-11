@@ -2,7 +2,7 @@ package plic.typechecker.checkers;
 
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.*;
+import plic.core.*;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;

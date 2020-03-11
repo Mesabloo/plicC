@@ -12,6 +12,11 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
+/**
+ * A parse error wrapper
+ * @param <Token>
+ * @param <S>
+ */
 public class ParseError<Token, S extends Stream<Token>> {
     protected long offset;
     protected Optional<ErrorItem<Token>> unexpected;
@@ -23,22 +28,57 @@ public class ParseError<Token, S extends Stream<Token>> {
         this.expected = expected;
     }
 
+    /**
+     * Construct an "unexpected EOF" parse error.
+     * @param stream
+     * @param <Token>
+     * @param <S>
+     * @return
+     */
     public static <Token, S extends Stream<Token>> ParseError<Token, S> eof(S stream) {
         return new ParseError<>(stream.getLineNumber(), Optional.of(new EOF<>()), new HashSet<>());
     }
 
+    /**
+     * Constructs a "Unexpected &lt;label&gt;" parse error.
+     * @param stream
+     * @param label
+     * @param <Token>
+     * @param <S>
+     * @return
+     */
     public static <Token, S extends Stream<Token>> ParseError<Token, S> label(S stream, String label) {
         return new ParseError<>(stream.getLineNumber(), Optional.of(new Label<>(label)), new HashSet<>());
     }
 
+    /**
+     * Constructs an "Unexpected &lt;token1&gt;, &lt;token2&gt;...&lt;tokenN&gt;" parse error.
+     * @param stream
+     * @param tks
+     * @param <Token>
+     * @param <S>
+     * @return
+     */
     public static <Token, S extends Stream<Token>> ParseError<Token, S> tokens(S stream, ArrayList<Token> tks) {
         return new ParseError<>(stream.getLineNumber(), Optional.of(new Tokens<>(tks)), new HashSet<>());
     }
 
+    /**
+     * Constructs an empty parse error
+     * @param stream
+     * @param <Token>
+     * @param <S>
+     * @return
+     */
     public static <Token, S extends Stream<Token>> ParseError<Token, S> empty(S stream) {
         return new ParseError<>(stream.getLineNumber(), Optional.empty(), new HashSet<>());
     }
 
+    /**
+     * Appends two parse errors together, keeping the longest match.
+     * @param err
+     * @return
+     */
     public ParseError<Token, S> mappend(ParseError<Token, S> err) {
         if (this.offset < err.offset)
             return err;

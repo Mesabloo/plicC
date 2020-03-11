@@ -2,9 +2,9 @@ package plic.typechecker.checkers;
 
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.InstructionNode;
-import plic.parser.ast.ProgramNode;
-import plic.parser.ast.TreeNode;
+import plic.core.InstructionNode;
+import plic.core.ProgramNode;
+import plic.core.TreeNode;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;
@@ -20,7 +20,7 @@ public class TCProgram implements TypeCheck<Void> {
 
     @Override
     public Product<SymbolTable, Either<TypeError, Void>> read(SymbolTable e) {
-        ArrayList<TreeNode> stts = this.node.getStatements();
+        ArrayList<TreeNode> stts = (ArrayList<TreeNode>) this.node.getStatements().clone();
         if (stts.isEmpty())
             return new Product<>(e, Either.right(null));
         else {

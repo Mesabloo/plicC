@@ -1,4 +1,4 @@
-package plic.parser.ast;
+package plic.core;
 
 public class OutputInstrNode extends InstructionNode {
     private ValueNode val;

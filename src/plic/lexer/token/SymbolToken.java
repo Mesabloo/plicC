@@ -1,5 +1,8 @@
 package plic.lexer.token;
 
+/**
+ * A token representing a symbol.
+ */
 public class SymbolToken extends Token {
     private String symbol;
 

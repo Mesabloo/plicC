@@ -1,4 +1,4 @@
-package plic.parser.ast;
+package plic.core;
 
 import plic.lexer.token.IdentifierToken;
 

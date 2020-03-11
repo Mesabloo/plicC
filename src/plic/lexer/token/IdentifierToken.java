@@ -1,5 +1,8 @@
 package plic.lexer.token;
 
+/**
+ * A token representing a basic identifier.
+ */
 public class IdentifierToken extends Token {
     private String name;
 

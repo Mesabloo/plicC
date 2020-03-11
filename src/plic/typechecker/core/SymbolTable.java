@@ -1,7 +1,7 @@
 package plic.typechecker.core;
 
 import control.copy.Copiable;
-import plic.parser.ast.DeclarationNode;
+import plic.core.DeclarationNode;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

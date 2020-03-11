@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class Lexeme {
+    /**
+     * Strips any space/comment before apply a {@link Parseable}.
+     * @param p
+     * @param <A>
+     * @return
+     */
     public static <A> Parseable<Character, Reader, A> lexeme(Parseable<Character, Reader, A> p) {
         Parseable<Character, Reader, Void> skipped =
             Parseable.<Character, Reader>satisfy(isSpaceOrNewline()).some().void_()
@@ -20,6 +26,10 @@ public class Lexeme {
         return c -> c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 
+    /**
+     * Matches a line comment.
+     * @return
+     */
     private static Parseable<Character, Reader, Void> lineComment() {
         return String_.string("//").then(Parseable.<Character, Reader>takeWhile(isNotNewline())).void_();
     }

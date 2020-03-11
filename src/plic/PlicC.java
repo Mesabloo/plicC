@@ -1,9 +1,14 @@
 package plic;
 
+import plic.core.ProgramNode;
+import plic.generator.mips.MIPSGenerator;
+import plic.generator.mips.ProgramGenerator;
 import plic.lexer.Lexer;
 import plic.lexer.token.Token;
 import plic.parser.Parser;
-import plic.parser.ast.SyntaxTree;
+import plic.core.SyntaxTree;
+import plic.typechecker.TypeChecker;
+import plic.typechecker.core.SymbolTable;
 
 import java.util.ArrayList;
 
@@ -26,7 +31,11 @@ public class PlicC {
 
             ArrayList<Token> tokens = new Lexer(path).lex();
             SyntaxTree ast = new Parser(tokens).parse();
-            // We do not do anything with the AST right now, but soon.
+            SymbolTable syms = new TypeChecker().check(ast);
+            MIPSGenerator.symbols = syms;
+
+            MIPSGenerator toMips = new ProgramGenerator((ProgramNode) ast.getRoot());
+            System.out.println(toMips.generate(new StringBuilder()));
         } catch (Exception e) {
             System.err.printf("ERREUR: %s\n", e.getMessage());
             System.exit(1);

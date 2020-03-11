@@ -3,7 +3,7 @@ package plic.typechecker.checkers;
 import control.monad.state.MonadState;
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.DeclarationNode;
+import plic.core.DeclarationNode;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.RedefinedVariable;

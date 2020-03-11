@@ -1,4 +1,4 @@
-package plic.parser.ast;
+package plic.core;
 
 import plic.lexer.token.IntegerToken;
 
@@ -12,5 +12,9 @@ public class IntegerNode extends ValueNode {
     @Override
     public String toString_(int level) {
         return "" + val;
+    }
+
+    public long getInteger() {
+        return this.val;
     }
 }

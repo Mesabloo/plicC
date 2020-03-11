@@ -12,6 +12,9 @@ import text.parser.combinators.error.ParseError;
 
 import java.util.ArrayList;
 
+/**
+ * Matches one of the keywords in the grammar.
+ */
 public class KeywordLexer implements Lexec<Token> {
     public KeywordLexer() {
 

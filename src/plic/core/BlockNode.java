@@ -1,6 +1,4 @@
-package plic.parser.ast;
-
-import data.product.Product;
+package plic.core;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

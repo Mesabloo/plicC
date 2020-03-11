@@ -1,5 +1,8 @@
 package plic.lexer.token;
 
+/**
+ * A token representing a keyword.
+ */
 public class KeywordToken extends Token {
     private String kw;
 

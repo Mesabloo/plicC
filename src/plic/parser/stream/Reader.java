@@ -6,6 +6,9 @@ import text.parser.combinators.Stream;
 
 import java.util.ArrayList;
 
+/**
+ * The {@link Reader} class is a wrapper around a {@link Stream} of grammar {@link Token}s.
+ */
 public class Reader implements Stream<Token>, Copiable<Reader> {
     private ArrayList<Token> tokens;
     private int pointer;

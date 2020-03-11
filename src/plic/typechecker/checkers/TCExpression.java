@@ -2,10 +2,10 @@ package plic.typechecker.checkers;
 
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.DeclarationNode;
-import plic.parser.ast.IdentifierNode;
-import plic.parser.ast.IntegerNode;
-import plic.parser.ast.ValueNode;
+import plic.core.DeclarationNode;
+import plic.core.IdentifierNode;
+import plic.core.IntegerNode;
+import plic.core.ValueNode;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;

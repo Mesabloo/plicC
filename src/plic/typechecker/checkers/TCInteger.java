@@ -2,8 +2,8 @@ package plic.typechecker.checkers;
 
 import data.either.Either;
 import data.product.Product;
-import plic.parser.ast.DeclarationNode;
-import plic.parser.ast.IntegerNode;
+import plic.core.DeclarationNode;
+import plic.core.IntegerNode;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;

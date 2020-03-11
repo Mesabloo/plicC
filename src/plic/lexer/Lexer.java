@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import static text.parser.combinators.Parseable.pure;
 import static plic.lexer.combinators.Lexeme.lexeme;
 
+/**
+ * Basic lexer class to fetch the next valid token (or a parse error).
+ */
 public class Lexer {
     private Reader stream;
 
@@ -29,6 +32,9 @@ public class Lexer {
         this.stream = res.fst;
     }
 
+    /**
+     * @return The next valid token according to the {@see plic.lexer.tokenizers}
+     */
     public Token next() {
         Product<Reader, Either<ParseError<Character, Reader>, Token>> res = lexeme(
                            new KeywordLexer().try_()
@@ -44,10 +50,16 @@ public class Lexer {
         return res.snd.fromRight();
     }
 
+    /**
+     * @return true if the stream is at EOF, false otherwise.
+     */
     public boolean hasNext() {
         return !this.stream.eof();
     }
 
+    /**
+     * @return All the valid tokens in the stream.
+     */
     public ArrayList<Token> lex() {
         ArrayList<Token> tks = new ArrayList<>();
         while (this.hasNext())

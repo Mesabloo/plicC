@@ -1,12 +1,4 @@
-package plic.parser.ast;
-
-import data.either.Either;
-import data.product.Product;
-import plic.parser.Parsec;
-import plic.parser.parsecs.BlockParsec;
-import plic.parser.parsecs.IdentifierParsec;
-import plic.parser.parsecs.KeywordParsec;
-import plic.parser.stream.Reader;
+package plic.core;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

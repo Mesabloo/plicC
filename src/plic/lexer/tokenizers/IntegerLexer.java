@@ -12,6 +12,9 @@ import text.parser.combinators.error.ParseError;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+/**
+ * Matches an integer according to the grammar.
+ */
 public class IntegerLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {
