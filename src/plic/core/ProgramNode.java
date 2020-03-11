@@ -25,4 +25,12 @@ public class ProgramNode extends TreeNode {
         String prefix = super.toString_(level);
         return prefix + "Program '" + name + "'\n" + statements.stream().map(node -> node.toString_(level + INDENT)).collect(Collectors.joining("\n"));
     }
+
+    public ArrayList<TreeNode> getStatements() {
+        return this.statements;
+    }
+
+    public IdentifierNode getIdentifier() {
+        return this.name;
+    }
 }

@@ -12,4 +12,8 @@ public class OutputInstrNode extends InstructionNode {
         String prefix = super.toString_(level);
         return prefix + "write " + this.val.toString_(level);
     }
+
+    public ValueNode getExpression() {
+        return this.val;
+    }
 }

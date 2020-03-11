@@ -14,4 +14,12 @@ public class DefinitionNode extends InstructionNode {
         String prefix = super.toString_(level);
         return prefix + lhs.toString_(level) + " := " + rhs.toString_(level);
     }
+
+    public ValueNode lhs() {
+        return this.lhs;
+    }
+
+    public ValueNode rhs() {
+        return this.rhs;
+    }
 }

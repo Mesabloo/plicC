@@ -11,4 +11,8 @@ public class SyntaxTree {
     public String toString() {
         return root.toString_(0);
     }
+
+    public TreeNode getRoot() {
+        return this.root;
+    }
 }

@@ -5,7 +5,7 @@ import data.product.Product;
 import plic.parser.Parsec;
 import plic.parser.stream.Reader;
 
-public class DeclarationNode extends TreeNode {
+public class DeclarationNode extends InstructionNode {
     public enum Type {
         ENTIER, // TABLEAU
             ;

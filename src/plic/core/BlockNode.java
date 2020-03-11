@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class BlockNode extends TreeNode {
-    private SymbolTable symbols;
     private ArrayList<TreeNode> statements;
 
-    public BlockNode(Product<ArrayList<DeclarationNode>, ArrayList<TreeNode>> nodes) {
-        this.symbols = SymbolTable.fromNodes(nodes.fst);
-        this.statements = nodes.snd;
+    public BlockNode(ArrayList<TreeNode> nodes) {
+        this.statements = nodes;
     }
 
     public ArrayList<TreeNode> toList() {
