@@ -5,6 +5,6 @@ programme // y
 {
     entier x ;
 
-    xyZ := 98 ; lmao := // test
-     0 ;
+    x := 0 ;
+    ecrire x ;
 }

@@ -1,7 +1,9 @@
 programme hello {
     entier x ;
-    entier y ;
-
+    entier
+    y
+                     ;
+        ecrire 0 ;
     y := 98 ;
-    x := 2 ;
+    x := 5 ;
 }
