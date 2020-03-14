@@ -26,6 +26,7 @@ public class ProgramGenerator extends MIPSGenerator {
     private static StringBuilder printMacro = new StringBuilder()
         .append(".macro println ()\n")
         .append("# Print $a0\n")
+        .append("move $a0, $v0\n")
         .append("li $v0, 1\n")
         .append("syscall\n")
         .append("# Print \"\\n\"\n")

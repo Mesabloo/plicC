@@ -18,9 +18,10 @@ public class DeclarationGenerator extends MIPSGenerator {
             .append(".eqv __")
             .append(this.node.getName())
             .append(" ")
-            .append(MIPSGenerator.symbols.getOffsetOf(this.node.getName()))
-            .append("$s0\n")
+            .append(MIPSGenerator.symbols.getOffsetOf(this.node.getName()).get())
+            .append("($s0)\n")
             .append("addi $sp, $sp, ")
-            .append(SymbolTable.TypeSize.fromType(MIPSGenerator.symbols.getTypeOf(this.node.getName()).get()).size());
+            .append(SymbolTable.TypeSize.fromType(MIPSGenerator.symbols.getTypeOf(this.node.getName()).get()).size())
+            .append("\n");
     }
 }

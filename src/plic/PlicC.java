@@ -1,6 +1,7 @@
 package plic;
 
 import plic.core.ProgramNode;
+import plic.generator.Generator;
 import plic.generator.mips.MIPSGenerator;
 import plic.generator.mips.ProgramGenerator;
 import plic.lexer.Lexer;
@@ -34,7 +35,7 @@ public class PlicC {
             SymbolTable syms = new TypeChecker().check(ast);
             MIPSGenerator.symbols = syms;
 
-            MIPSGenerator toMips = new ProgramGenerator((ProgramNode) ast.getRoot());
+            Generator toMips = new ProgramGenerator((ProgramNode) ast.getRoot());
             System.out.println(toMips.generate(new StringBuilder()));
         } catch (Exception e) {
             System.err.printf("ERREUR: %s\n", e.getMessage());

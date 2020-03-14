@@ -15,7 +15,7 @@ public class BlockGenerator extends MIPSGenerator {
     @Override
     public StringBuilder generate(StringBuilder builder) {
         for (TreeNode node : nodes) {
-            builder.append(new InstructionGenerator((InstructionNode) node).generate(builder));
+            new InstructionGenerator((InstructionNode) node).generate(builder);
         }
         return builder;
     }
