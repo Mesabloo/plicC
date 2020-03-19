@@ -65,7 +65,7 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
             .append(genIndent(indent))
                 .append("nl: .asciiz \"\\n\"\n")
             .append(genIndent(indent))
-                .append("arrayIndexOutOfBoundsMessage: .asciiz \"Array index out of bounds: \"\n")
+                .append("arrayIndexOutOfBoundsMessage: .asciiz \"ERREUR: Array index out of bounds: \"\n")
             .append(genIndent(indent))
                 .append("arrayMaxSizeMessage: .asciiz \"array size: \"\n")
             .append(genIndent(indent))
