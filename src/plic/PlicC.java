@@ -1,9 +1,7 @@
 package plic;
 
 import plic.core.ProgramNode;
-import plic.generator.Generator;
-import plic.generator.mips.MIPSGenerator;
-import plic.generator.mips.ProgramGenerator;
+import plic.generator.MIPSGenerator;
 import plic.lexer.Lexer;
 import plic.lexer.token.Token;
 import plic.parser.Parser;
@@ -33,10 +31,9 @@ public class PlicC {
             ArrayList<Token> tokens = new Lexer(path).lex();
             SyntaxTree ast = new Parser(tokens).parse();
             SymbolTable syms = new TypeChecker().check(ast);
-            MIPSGenerator.symbols = syms;
 
-            Generator toMips = new ProgramGenerator((ProgramNode) ast.getRoot());
-            System.out.println(toMips.generate(new StringBuilder()));
+            MIPSGenerator.symbols.append(syms);
+            System.out.println(ast.generateMIPS(new StringBuilder(), 0));
         } catch (Exception e) {
             System.err.printf("ERREUR: %s\n", e.getMessage());
             System.exit(1);

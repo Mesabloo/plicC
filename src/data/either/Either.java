@@ -32,6 +32,11 @@ public abstract class Either<A, B> {
         }
 
         @Override
+        public <C> Either<A, C> bind(Function<B, Either<A, C>> fun) {
+            return new Left<>(left);
+        }
+
+        @Override
         public B fromRight() {
             throw new IllegalStateException("Cannot call `fromRight()` on Left class");
         }
@@ -65,6 +70,11 @@ public abstract class Either<A, B> {
         }
 
         @Override
+        public <C> Either<A, C> bind(Function<B, Either<A, C>> fun) {
+            return fun.apply(right);
+        }
+
+        @Override
         public B fromRight() {
             return this.right;
         }
@@ -92,6 +102,8 @@ public abstract class Either<A, B> {
      * @return A new {@link Either} computation
      */
     public abstract <C> Either<A, C> fmap(Function<B, C> fun);
+
+    public abstract <C> Either<A, C> bind(Function<B, Either<A, C>> fun);
 
     /**
      * Retrieves the {@link Right} part of an {@link Either}.

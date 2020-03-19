@@ -6,6 +6,7 @@ import data.product.Product;
 import text.parser.combinators.error.ParseError;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -137,6 +138,15 @@ public interface Parseable<Token, Stream_ extends Stream<Token> & Copiable<Strea
         };
     }
 
+    /**
+     * Tries to apply a {@link Parseable} and return {@link Optional#empty()} if it fails.
+     * It behaves as if nothing was consumed in this case.
+     * @return
+     */
+    default Parseable<Token, Stream_, Optional<A>> optional() {
+        return this.try_().fmap(Optional::of).orElse(Parseable.pure(Optional.empty()));
+    }
+
     // instance Monad Parseable
 
     /**
@@ -202,17 +212,13 @@ public interface Parseable<Token, Stream_ extends Stream<Token> & Copiable<Strea
     }
 
     /**
-     * Tries to apply a parser on the stream. If the parser succeeds, the stream is not updated.
-     * @param p
-     * @param <Token>
-     * @param <Stream_>
-     * @param <A>
+     * Tries to apply a {@link Parseable} on the {@link Stream_}. If the parser succeeds, the stream is not updated.
      * @return
      */
-    static <Token, Stream_ extends Stream<Token> & Copiable<Stream_>, A> Parseable<Token, Stream_, A> lookahead(Parseable<Token, Stream_, A> p) {
+    default Parseable<Token, Stream_, A> lookahead() {
         return stream -> {
             Stream_ oldStream = stream.copy();
-            Product<Stream_, Either<ParseError<Token, Stream_>, A>> res = p.parse(stream);
+            Product<Stream_, Either<ParseError<Token, Stream_>, A>> res = this.parse(stream);
             if (!res.snd.isLeft())
                 return new Product<>(oldStream, right(res.snd.fromRight()));
             return res;
