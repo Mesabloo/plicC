@@ -51,9 +51,7 @@ public class IdentifierNode extends ValueNode {
     public StringBuilder generateMIPSAsLHS(StringBuilder builder, int indent) {
         return builder
             .append(genIndent(indent))
-                .append("move $a0, $s0\n")
-            .append(genIndent(indent))
-                .append("subu $a0, $a0, ")
+                .append("la $a0, __var_")
                     .append(symbols.getOffsetOf(name).get())
                     .append("\n");
     }
