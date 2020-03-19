@@ -2,6 +2,7 @@ package plic.parser.parsecs;
 
 import data.either.Either;
 import data.product.Product;
+import plic.core.InstructionNode;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
 import plic.core.BlockNode;
@@ -21,7 +22,7 @@ public class BlockParsec implements Parsec<BlockNode> {
             .then(new DeclarationParsec().try_().many())
             .bind(decls -> new InstructionParsec().try_().some()
                 .fmap(instrs -> {
-                    ArrayList<TreeNode> list = new ArrayList<>(decls);
+                    ArrayList<InstructionNode> list = new ArrayList<>(decls);
                     list.addAll(instrs);
                     return list;
                 }))

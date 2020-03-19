@@ -3,10 +3,8 @@ package plic.typechecker.core;
 import control.copy.Copiable;
 import plic.core.DeclarationNode;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 
 public class SymbolTable implements Copiable<SymbolTable> {
     public static class Key implements Copiable<Key> {
@@ -46,26 +44,18 @@ public class SymbolTable implements Copiable<SymbolTable> {
         }
     }
 
-    public enum TypeSize {
-        ENTIER(4);
+    public static class TypeSize {
+        public static final TypeSize ENTIER = new TypeSize(4);
+        public static final Function<Long, TypeSize> TABLEAU = nbElem -> new TypeSize(nbElem * 4);
 
         private long size;
 
-        TypeSize(long s) {
+        private TypeSize(long s) {
             this.size = s;
         }
 
         public long size() {
             return this.size;
-        }
-
-        public static TypeSize fromType(DeclarationNode.Type ty) {
-            switch (ty) {
-                case ENTIER:
-                    return ENTIER;
-                default:
-                    throw new IllegalArgumentException("Not yet implemented!");
-            }
         }
     }
 
@@ -78,7 +68,7 @@ public class SymbolTable implements Copiable<SymbolTable> {
     }
 
     public void add(String k, DeclarationNode.Type ty) {
-        TypeSize ts = TypeSize.fromType(ty);
+        TypeSize ts = ty.getTypeSize();
         this.symbols.put(new Key(k), new Entry(ty, pointer));
         pointer -= ts.size();
     }
@@ -95,7 +85,7 @@ public class SymbolTable implements Copiable<SymbolTable> {
         return Optional.ofNullable(this.symbols.get(new Key(identifier))).map(e -> e.off);
     }
 
-    public static SymbolTable fromNodes(ArrayList<DeclarationNode> stts) {
+    public static <C extends Collection<DeclarationNode>> SymbolTable fromNodes(C stts) {
         SymbolTable st = new SymbolTable();
         stts.forEach(n -> st.add(n.getName(), n.getType()));
         return st;
@@ -107,5 +97,10 @@ public class SymbolTable implements Copiable<SymbolTable> {
         for (Map.Entry<Key, Entry> e : this.symbols.entrySet())
             st.add(e.getKey().copy().val, e.getValue().copy().type);
         return st;
+    }
+
+    public void append(SymbolTable syms) {
+        this.symbols.putAll(syms.symbols);
+        this.pointer += syms.pointer;
     }
 }

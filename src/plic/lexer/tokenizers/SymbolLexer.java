@@ -18,11 +18,13 @@ import java.util.ArrayList;
 public class SymbolLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {
-        return (String_.string(symbols.get(0))
-                .orElse(String_.string(symbols.get(1))
-                .orElse(String_.string(symbols.get(2)))
-                .orElse(String_.string(symbols.get(3)))
-                .orElse(Parseable.empty()))
+        return (String_.string("{")
+                .orElse(String_.string("}"))
+                .orElse(String_.string(":="))
+                .orElse(String_.string(";"))
+                .orElse(String_.string("["))
+                .orElse(String_.string("]"))
+                .orElse(Parseable.empty())
             ).bind(sym -> Parseable.<Character, Reader>lineNumber()
                 .fmap(line -> new SymbolToken(line, sym)))
             .fmap(t -> (Token) t)

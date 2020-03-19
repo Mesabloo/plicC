@@ -15,7 +15,13 @@ import text.parser.combinators.error.ParseError;
 public class DeclarationParsec implements Parsec<DeclarationNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, DeclarationNode>> apply(Reader reader) {
-        return (new KeywordParsec("entier").bind(t -> Parseable.pure(DeclarationNode.Type.ENTIER)))
+        return (new KeywordParsec("entier")
+                .<DeclarationNode.Type>fmap(t -> new DeclarationNode.TypeEntier())
+            .orElse(new KeywordParsec("tableau")
+                .then(new SymbolParsec("["))
+                .then(new IntegerParsec())
+                .then_(new SymbolParsec("]"))
+                .fmap(t -> new DeclarationNode.TypeTableau((int) t.getInteger()))))
             .bind(ty -> new IdentifierParsec()
                 .fmap(id -> new DeclarationNode(ty, id.getIdentifier()))
             )

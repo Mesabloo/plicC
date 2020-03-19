@@ -14,7 +14,7 @@ import text.parser.combinators.error.ParseError;
 public class ValueParsec implements Parsec<ValueNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, ValueNode>> apply(Reader reader) {
-        return new IdentifierParsec().fmap(n -> (ValueNode) n)
+        return new AccessParsec().fmap(n -> (ValueNode) n)
             .orElse(new IntegerParsec().fmap(n -> (ValueNode) n)).parse(reader);
     }
 }

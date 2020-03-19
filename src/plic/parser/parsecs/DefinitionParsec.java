@@ -14,7 +14,7 @@ import text.parser.combinators.error.ParseError;
 public class DefinitionParsec implements Parsec<DefinitionNode> {
     @Override
     public Product<Reader, Either<ParseError<Token, Reader>, DefinitionNode>> apply(Reader reader) {
-        return new IdentifierParsec()
+        return new AccessParsec()
             .bind(id -> new SymbolParsec(":=")
                 .then(new ValueParsec())
                 .fmap(v -> new DefinitionNode(id, v))
