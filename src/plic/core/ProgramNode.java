@@ -55,7 +55,7 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
                 .append("exit:\n")
             .append("# We can exit now...\n")
             .append(genIndent(indent + 4))
-                .append("li $v0, 10\n")
+                .append("li $v0, 17\n")
             .append(genIndent(indent + 4))
                 .append("syscall\n")
             .append(arrayIndexOutOfBounds)
