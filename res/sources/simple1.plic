@@ -1,10 +1,9 @@
-// test
-programme // y
- x
-// Test de commentaire
-{
+programme x {
     entier x ;
+    tableau [ 1 ] y ;
 
-    x := 0 ;
+    y [ 0 ] := 1 ;
+    x := y [ 0 ] ;
+
     ecrire x ;
 }
