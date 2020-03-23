@@ -52,7 +52,7 @@ public class IdentifierNode extends ValueNode {
         return builder
             .append(genIndent(indent))
                 .append("la $a0, __var_")
-                    .append(symbols.getOffsetOf(name).get())
+                    .append(name)
                     .append("\n");
     }
 
