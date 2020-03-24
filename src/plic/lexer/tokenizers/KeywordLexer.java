@@ -25,8 +25,11 @@ public class KeywordLexer implements Lexec<Token> {
         return
             (String_.string("programme")
                 .orElse(String_.string("ecrire").try_())
-                .orElse(String_.string("entier"))
+                .orElse(String_.string("entier").try_())
+                .orElse(String_.string("et"))
+                .orElse(String_.string("ou"))
                 .orElse(String_.string("tableau"))
+                .orElse(String_.string("non"))
                 .orElse(Parseable.empty())
             )
             .then_(Parseable.<Character, Reader>satisfy(Character::isSpace).lookahead().void_())

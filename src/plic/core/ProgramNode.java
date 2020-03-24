@@ -36,10 +36,16 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
         return super.generateMIPS(
             builder
                 .append("# programme ")
-                .append(name.getIdentifier())
-                .append("\n")
+                    .append(name.getIdentifier())
+                    .append("\n")
                 .append(".text\n")
                 .append(print)
+                .append("\n")
+                .append(push)
+                .append("\n")
+                .append(pop)
+                .append("\n")
+                .append(boundCheck)
                 .append("\n\n")
                 .append(genIndent(indent))
                     .append("main:\n")
@@ -73,9 +79,10 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
     }
 
     private static StringBuilder print = new StringBuilder()
-        .append(".macro println ()\n")
+        .append("# prints the content of %1\n")
+        .append(".macro println (%1)\n")
         .append("# Print $a0\n")
-        .append("    move $a0, $v0\n")
+        .append("    move $a0, %1\n")
         .append("    li $v0, 1\n")
         .append("    syscall\n")
         .append("# Print \"\\n\"\n")
@@ -83,6 +90,32 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
         .append("    la $a0, nl\n")
         .append("    syscall\n")
         .append(".end_macro\n");
+
+    private static StringBuilder push = new StringBuilder()
+        .append("# pushes %1 of size %2 onto the stack\n")
+        .append(".macro push (%1, %2)\n")
+        .append("    sw %1, ($sp)\n")
+        .append("    subu $sp, $sp, %2\n")
+        .append(".end_macro\n");
+
+    private static StringBuilder pop = new StringBuilder()
+        .append("# pops the stack by %2 octets into %1\n")
+        .append(".macro pop (%1, %2)\n")
+        .append("    addu $sp, $sp, %2\n")
+        .append("    lw %1, ($sp)\n")
+        .append(".end_macro\n");
+
+    private static StringBuilder boundCheck = new StringBuilder()
+        .append("# checks if 0 <= %1 < %2 else throws an ArrayIndexOutOfBoundsException\n")
+        .append(".macro boundCheck (%1, %2)\n")
+        .append("    li $t0, %2\n")
+        .append("# if %1 >= $t0 goto [arrayIndexOutOfBoundsException]\n")
+        .append("    bge %1, $t0, arrayIndexOutOfBoundsException\n")
+        .append("    li $t1, 0\n")
+        .append("# if %1 < 0 goto [arrayIndexOutOfBoundsException]\n")
+        .append("    blt %1, $t1, arrayIndexOutOfBoundsException\n")
+        .append(".end_macro");
+
 
     private static StringBuilder arrayIndexOutOfBounds = new StringBuilder()
         .append("\n\narrayIndexOutOfBoundsException:\n")
@@ -98,8 +131,7 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
         .append("    la $a0, arrayIndexAtMessage\n")
         .append("    li $v0, 4\n")
         .append("    syscall\n")
-        .append("    move $v0, $t1\n")
-        .append("    println ()\n")
+        .append("    println ($t1)\n")
         .append("    li $a0, 1\n")
         .append("    j exit\n");
 }

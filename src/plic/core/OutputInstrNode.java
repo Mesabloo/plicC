@@ -43,12 +43,11 @@ public class OutputInstrNode extends InstructionNode {
         return val
             .generateMIPSAsRHS(builder
                 .append("# ecrire ")
-                .append(val.toString_(0))
-                .append("\n")
-                .append(genIndent(indent)),
+                    .append(val.toString_(0))
+                    .append("\n"),
                 indent
             )
             .append(genIndent(indent))
-                .append("println ()\n");
+                .append("println ($v0)\n");
     }
 }
