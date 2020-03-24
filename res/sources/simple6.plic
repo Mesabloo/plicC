@@ -1,0 +1,12 @@
+programme test {
+    tableau [ 5 ] tab ;
+    entier m ;
+
+    tab [ 1 ] := 0 ;
+    tab [ 2 ] := 2 ;
+    tab [ 0 ] := 0 ;
+
+    m := 0 ;
+
+    ecrire tab [ m ] = tab [ m + 1 ] ;
+}

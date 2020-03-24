@@ -1,0 +1,11 @@
+programme test {
+    ecrire 1 = 0 ;                     // 0
+    ecrire 1 < 0 ;                     // 0
+    ecrire 1 > 0 ;                     // 1
+    ecrire 1 <= 0 ;                    // 0
+    ecrire 1 >= 0 ;                    // 1
+    ecrire 1 # 0 ;                     // 1
+
+    ecrire ( 1 = 0 ) ou ( 0 = 1 ) ;    // 0
+    ecrire ( 0 <= 1 ) et ( 1 >= 0 ) ;  // 1
+}

@@ -1,9 +1,11 @@
 programme x {
     entier x ;
     tableau [ 1 ] y ;
+    entier i ;
 
-    y [ 0 ] := 1 ;
-    x := y [ 2 ] ;
+    i := 2 ;
+    y [ 2 ] := 1 ;
+    // x := y [ 2 ] ;
 
-    ecrire x ;
+    ecrire y [ 0 ] ;
 }

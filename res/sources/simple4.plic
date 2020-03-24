@@ -1,0 +1,10 @@
+programme somme {
+    entier x ;
+    entier y ;
+
+    x := 1 ;
+    y := 2 ;
+    x := x + y ;
+
+    ecrire x ; // x = 3
+}
