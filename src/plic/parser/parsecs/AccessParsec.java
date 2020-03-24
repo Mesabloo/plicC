@@ -2,10 +2,8 @@ package plic.parser.parsecs;
 
 import data.either.Either;
 import data.product.Product;
-import plic.core.AccessNode;
-import plic.core.IntegerNode;
-import plic.core.ValueNode;
-import plic.lexer.token.IntegerToken;
+import plic.core.expression.AccessNode;
+import plic.core.expression.ValueNode;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
 import plic.parser.stream.Reader;

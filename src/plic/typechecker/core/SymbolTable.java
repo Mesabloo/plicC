@@ -1,7 +1,7 @@
 package plic.typechecker.core;
 
 import control.copy.Copiable;
-import plic.core.DeclarationNode;
+import plic.core.instruction.DeclarationNode;
 
 import java.util.*;
 import java.util.function.Function;

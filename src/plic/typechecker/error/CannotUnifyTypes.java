@@ -1,6 +1,5 @@
 package plic.typechecker.error;
 
-import plic.core.DeclarationNode;
 import plic.typechecker.core.Type;
 
 public class CannotUnifyTypes extends TypeError {

@@ -2,15 +2,14 @@ package plic.core;
 
 import data.either.Either;
 import data.product.Product;
-import plic.generator.MIPSGenerator;
+import plic.core.expression.IdentifierNode;
+import plic.core.instruction.InstructionNode;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProgramNode extends BlockNode implements TypeCheck<Void> {
     private IdentifierNode name;
@@ -40,6 +39,8 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
                     .append("\n")
                 .append(".text\n")
                 .append(print)
+                .append("\n")
+                .append(println)
                 .append("\n")
                 .append(push)
                 .append("\n")
@@ -79,16 +80,20 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
     }
 
     private static StringBuilder print = new StringBuilder()
-        .append("# prints the content of %1\n")
-        .append(".macro println (%1)\n")
-        .append("# Print $a0\n")
+        .append("# prints the content of %1 (syscall code is given in %2)\n")
+        .append(".macro print (%1, %2)\n")
         .append("    move $a0, %1\n")
-        .append("    li $v0, 1\n")
+        .append("    li $v0, %2\n")
         .append("    syscall\n")
+        .append(".end_macro\n");
+
+    private static StringBuilder println = new StringBuilder()
+        .append("# prints the content of %1 and appends a newline at the end\n")
+        .append(".macro println (%1)\n")
+        .append("    print (%1, 1)\n")
         .append("# Print \"\\n\"\n")
-        .append("    li $v0, 4\n")
         .append("    la $a0, nl\n")
-        .append("    syscall\n")
+        .append("    print ($a0, 4)\n")
         .append(".end_macro\n");
 
     private static StringBuilder push = new StringBuilder()
@@ -120,17 +125,13 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
     private static StringBuilder arrayIndexOutOfBounds = new StringBuilder()
         .append("\n\narrayIndexOutOfBoundsException:\n")
         .append("    move $t1, $v0\n")
-        .append("    li $v0, 4\n")
         .append("    la $a0, arrayIndexOutOfBoundsMessage\n")
-        .append("    syscall\n")
+        .append("    print ($a0, 4)\n")
         .append("    la $a0, arrayMaxSizeMessage\n")
-        .append("    syscall\n")
-        .append("    move $a0, $t0\n")
-        .append("    li $v0, 1\n")
-        .append("    syscall\n")
+        .append("    print ($a0, 4)\n")
+        .append("    print ($t0, 1)\n")
         .append("    la $a0, arrayIndexAtMessage\n")
-        .append("    li $v0, 4\n")
-        .append("    syscall\n")
+        .append("    print ($a0, 4)\n")
         .append("    println ($t1)\n")
         .append("    li $a0, 1\n")
         .append("    j exit\n");

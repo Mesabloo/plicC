@@ -4,7 +4,7 @@ import data.either.Either;
 import data.product.Product;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
-import plic.core.InstructionNode;
+import plic.core.instruction.InstructionNode;
 import plic.parser.stream.Reader;
 import text.parser.combinators.error.ParseError;
 

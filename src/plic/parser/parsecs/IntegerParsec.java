@@ -5,7 +5,7 @@ import data.product.Product;
 import plic.lexer.token.IntegerToken;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
-import plic.core.IntegerNode;
+import plic.core.expression.IntegerNode;
 import plic.parser.stream.Reader;
 import text.parser.combinators.Parseable;
 import text.parser.combinators.error.ParseError;

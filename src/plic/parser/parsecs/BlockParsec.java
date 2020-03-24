@@ -2,11 +2,10 @@ package plic.parser.parsecs;
 
 import data.either.Either;
 import data.product.Product;
-import plic.core.InstructionNode;
+import plic.core.instruction.InstructionNode;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
 import plic.core.BlockNode;
-import plic.core.TreeNode;
 import plic.parser.stream.Reader;
 import text.parser.combinators.error.ParseError;
 

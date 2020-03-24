@@ -1,4 +1,4 @@
-package plic.core;
+package plic.core.expression;
 
 import data.either.Either;
 import data.product.Product;

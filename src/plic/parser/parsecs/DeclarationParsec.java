@@ -4,9 +4,8 @@ import data.either.Either;
 import data.product.Product;
 import plic.lexer.token.Token;
 import plic.parser.Parsec;
-import plic.core.DeclarationNode;
+import plic.core.instruction.DeclarationNode;
 import plic.parser.stream.Reader;
-import text.parser.combinators.Parseable;
 import text.parser.combinators.error.ParseError;
 
 /**

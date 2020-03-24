@@ -1,9 +1,8 @@
-package plic.core;
+package plic.core.instruction;
 
 import control.monad.state.MonadState;
 import data.either.Either;
 import data.product.Product;
-import plic.generator.MIPSGenerator;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.RedefinedVariable;
 import plic.typechecker.error.TypeError;

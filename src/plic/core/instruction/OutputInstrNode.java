@@ -1,7 +1,8 @@
-package plic.core;
+package plic.core.instruction;
 
 import data.either.Either;
 import data.product.Product;
+import plic.core.expression.ValueNode;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.core.Type;
 import plic.typechecker.error.TypeError;
@@ -42,7 +43,7 @@ public class OutputInstrNode extends InstructionNode {
     public StringBuilder generateMIPS(StringBuilder builder, int indent) {
         return val
             .generateMIPSAsRHS(builder
-                .append("# ecrire ")
+                .append("# print ")
                     .append(val.toString_(0))
                     .append("\n"),
                 indent

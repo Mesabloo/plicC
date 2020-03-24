@@ -1,15 +1,13 @@
-package plic.core;
+package plic.core.instruction;
 
 import control.monad.state.MonadState;
 import data.either.Either;
 import data.product.Product;
+import plic.core.expression.ValueNode;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.core.Type;
 import plic.typechecker.error.CannotUnifyTypes;
 import plic.typechecker.error.TypeError;
-import plic.typechecker.error.UndeclaredVariable;
-
-import java.util.Optional;
 
 public class DefinitionNode extends InstructionNode {
     private ValueNode lhs;

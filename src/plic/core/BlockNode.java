@@ -3,12 +3,12 @@ package plic.core;
 import control.monad.state.MonadState;
 import data.either.Either;
 import data.product.Product;
+import plic.core.instruction.InstructionNode;
 import plic.generator.MIPSGenerator;
 import plic.typechecker.TypeCheck;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.error.TypeError;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;

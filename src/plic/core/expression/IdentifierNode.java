@@ -1,7 +1,8 @@
-package plic.core;
+package plic.core.expression;
 
 import data.either.Either;
 import data.product.Product;
+import plic.core.instruction.DeclarationNode;
 import plic.lexer.token.IdentifierToken;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.core.Type;
