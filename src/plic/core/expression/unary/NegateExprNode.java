@@ -9,7 +9,9 @@ import plic.typechecker.error.TypeError;
 public class NegateExprNode extends UnaryOperatorNode {
     @Override
     public StringBuilder generateMIPSAsRHS(StringBuilder builder, int indent) {
-        return generateRHSWith(builder, indent, "neg");
+        return e1.generateMIPSAsRHS(builder, indent)
+            .append(genIndent(indent))
+                .append("neg $v0, $v0\n");
     }
 
     @Override
@@ -19,6 +21,6 @@ public class NegateExprNode extends UnaryOperatorNode {
 
     @Override
     public String toString_(int level) {
-        return "- " + e1.toString_(level);
+        return "- (" + e1.toString_(level) + ")";
     }
 }

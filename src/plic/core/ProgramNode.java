@@ -70,8 +70,6 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
             .append(genIndent(indent))
                 .append(".data\n")
             .append(genIndent(indent))
-                .append("nl: .asciiz \"\\n\"\n")
-            .append(genIndent(indent))
                 .append("arrayIndexOutOfBoundsMessage: .asciiz \"ERREUR: Array index out of bounds: \"\n")
             .append(genIndent(indent))
                 .append("arrayMaxSizeMessage: .asciiz \"array size: \"\n")
@@ -92,8 +90,8 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
         .append(".macro println (%1)\n")
         .append("    print (%1, 1)\n")
         .append("# Print \"\\n\"\n")
-        .append("    la $a0, nl\n")
-        .append("    print ($a0, 4)\n")
+        .append("    li $a0, '\\n'\n")
+        .append("    print ($a0, 11)\n")
         .append(".end_macro\n");
 
     private static StringBuilder push = new StringBuilder()

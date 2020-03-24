@@ -26,13 +26,6 @@ public abstract class UnaryOperatorNode extends ValueNode {
         return generateMIPSAsRHS(builder, indent);
     }
 
-    public StringBuilder generateRHSWith(StringBuilder builder, int indent, String instr) {
-        return e1.generateMIPSAsRHS(builder, indent)
-            .append(genIndent(indent))
-                .append(instr)
-                .append(" $v0, $v0\n");
-    }
-
     public MonadState<SymbolTable, Either<TypeError, Type>> check(String op) {
         switch (op) {
             case "-": // Int -> Int
