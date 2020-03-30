@@ -5,6 +5,7 @@ import data.product.Product;
 import plic.core.expression.ValueNode;
 import plic.typechecker.core.SymbolTable;
 import plic.typechecker.core.Type;
+import plic.typechecker.error.CannotUnifyTypes;
 import plic.typechecker.error.TypeError;
 
 import static data.either.Either.left;
@@ -34,6 +35,11 @@ public class OutputInstrNode extends InstructionNode {
                 Either<TypeError, Type> res = this.val.typecheck(env).snd;
                 if (res.isLeft())
                     return e_ -> new Product<>(e_, left(res.fromLeft()));
+                Type t = res.fromRight();
+
+                if (t != Type.ENTIER && t != Type.BOOLEEN)
+                    return e_ -> new Product<>(e_, left(new CannotUnifyTypes(t, Type.ENTIER)));
+
                 return e_ -> new Product<SymbolTable, Either<TypeError, SymbolTable>>(e_, right(env));
             })
             .read(s);
