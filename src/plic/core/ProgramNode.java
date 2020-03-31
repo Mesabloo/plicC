@@ -42,6 +42,8 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
                 .append("\n")
                 .append(println)
                 .append("\n")
+                .append(read)
+                .append("\n")
                 .append(push)
                 .append("\n")
                 .append(pop)
@@ -92,6 +94,14 @@ public class ProgramNode extends BlockNode implements TypeCheck<Void> {
         .append("# Print \"\\n\"\n")
         .append("    li $a0, '\\n'\n")
         .append("    print ($a0, 11)\n")
+        .append(".end_macro\n");
+
+    private static StringBuilder read = new StringBuilder()
+        .append("# reads stdin into effective memory address given as %1\n")
+        .append(".macro read (%1)\n")
+        .append("    li $v0, 5\n")
+        .append("    syscall\n")
+        .append("    sw $v0, (%1)\n")
         .append(".end_macro\n");
 
     private static StringBuilder push = new StringBuilder()

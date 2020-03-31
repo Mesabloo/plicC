@@ -39,31 +39,36 @@ public class IfThenNode extends ConditionalInstructionNode {
         long newBlock = blockCounter.preIncrement(1);
         return then.generateMIPS(
             condition.generateMIPSAsRHS(builder
-                .append("# si ")
+                .append("# if ")
                     .append(condition.toString_(indent))
                     .append("\n")
                 , indent)
                 .append(generateElseBranchIfNeeded(indent))
-                .append("# alors\n")
+                .append("# then\n")
                 .append(genIndent(indent))
-                    .append("_alors")
+                    .append("_then")
                         .append(newBlock)
                         .append(":\n")
             , indent)
             .append(genIndent(indent + 4))
-                .append("j _fsi")
+                .append("j _endif")
                     .append(newBlock)
                     .append("\n")
             .append(generateElse(indent))
             .append(genIndent(indent))
-                .append("_fsi")
+                .append("_endif")
                     .append(newBlock)
                     .append(":\n");
     }
 
     @Override
     public StringBuilder generateElseBranchIfNeeded(int indent) {
-        return new StringBuilder();
+        long newBlock = blockCounter.get();
+        return new StringBuilder()
+            .append(genIndent(indent))
+                .append("beqz $v0, _endif")
+                    .append(newBlock)
+                    .append("\n");
     }
 
     @Override

@@ -30,7 +30,7 @@ public class IfThenElseNode extends IfThenNode {
         long newBlock = blockCounter.get();
         return new StringBuilder()
             .append(genIndent(indent))
-                .append("beqz $v0, _sinon")
+                .append("beqz $v0, _else")
                     .append(newBlock)
                     .append("\n");
     }
@@ -40,9 +40,9 @@ public class IfThenElseNode extends IfThenNode {
         long newBlock = blockCounter.get();
         return else_.generateMIPS(
             new StringBuilder()
-                .append("# sinon\n")
+                .append("# else\n")
                 .append(genIndent(indent))
-                    .append("_sinon")
+                    .append("_else")
                         .append(newBlock)
                         .append(":\n")
             , indent);
