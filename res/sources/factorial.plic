@@ -2,18 +2,21 @@ programme factorial {
     entier n ;
     entier accumulateur ;
     entier estPositif ;
+    entier i ;
 
     estPositif := 1 ;
     lire n ; // On veut afficher la factorielle de n
 
-    si ( i = 0 )
-    alors { ecrire 0 ; }
+    si ( n = 0 )
+    alors { ecrire 1 ; }
     sinon {
-        si ( i < 0 )
+        si ( n < 0 )
         alors {
-            i := - i ;
+            n := - n ;
             estPositif := 0 ;
         }
+
+        accumulateur := 1 ;
 
         pour i dans 1 .. n repeter {
             accumulateur := accumulateur * i ;

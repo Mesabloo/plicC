@@ -1,11 +1,11 @@
 programme array {
+    entier i ;
+    entier x ;
+    // Un accumulateur pour l'input
     tableau [ 3 ] tab ;
     // On déclare un tableau (d'entiers ?) de taille 3.
 
     pour i dans 0 .. 2 repeter {
-        entier x ;
-        // Un accumulateur pour l'input
-
         lire x ; // On lit un nombre
 
         tab [ i ] := x ;

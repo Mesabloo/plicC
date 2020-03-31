@@ -1,0 +1,11 @@
+programme x {
+    entier x ;
+
+    lire x ;
+
+    tantque ( x # 2 ) repeter {
+        lire x ;
+    }
+
+    ecrire x ;
+}
