@@ -35,9 +35,10 @@ public class InputInstrNode extends InstructionNode {
             .append("# read ")
                 .append(readIn.getIdentifier())
                 .append("\n")
-            .append("la $a0, __var_")
-                .append(readIn.getIdentifier())
-                .append("\n")
+            .append(genIndent(indent))
+                .append("la $a0, __var_")
+                    .append(readIn.getIdentifier())
+                    .append("\n")
             .append(genIndent(indent))
                 .append("read ($a0)\n");
     }

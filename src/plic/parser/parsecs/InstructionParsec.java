@@ -18,6 +18,7 @@ public class InstructionParsec implements Parsec<InstructionNode> {
             .orElse(new InputParsec().fmap(in -> (InstructionNode) in))
             .orElse(new DefinitionParsec().fmap(def -> (InstructionNode) def))
             .orElse(new ConditionParsec().fmap(cond -> (InstructionNode) cond))
+            .orElse(new WhileParsec().fmap(w -> (InstructionNode) w))
             .parse(reader);
     }
 }
