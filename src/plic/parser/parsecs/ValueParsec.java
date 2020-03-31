@@ -34,7 +34,10 @@ public class ValueParsec implements Parsec<ValueNode> {
         @Override
         public Product<Reader, Either<ParseError<Token, Reader>, ValueNode>> apply(Reader reader) {
             return (new SymbolParsec("-")
-                    .then(new ValueParsec())
+                    .then(new SymbolParsec("(")
+                        .then(new ValueParsec())
+                        .then_(new SymbolParsec(")"))
+                    )
                     .fmap(v -> new NegateExprNode().set(v)))
                 .fmap(v -> (ValueNode) v)
                 .orElse(new KeywordParsec("non")

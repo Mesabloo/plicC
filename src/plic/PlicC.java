@@ -3,9 +3,11 @@ package plic;
 import plic.core.ProgramNode;
 import plic.generator.MIPSGenerator;
 import plic.lexer.Lexer;
+import plic.lexer.exceptions.LexerException;
 import plic.lexer.token.Token;
 import plic.parser.Parser;
 import plic.core.SyntaxTree;
+import plic.parser.exceptions.ParserException;
 import plic.typechecker.TypeChecker;
 import plic.typechecker.core.SymbolTable;
 
@@ -20,13 +22,13 @@ public class PlicC {
         try {
             // We do not handle multiple files for now.
             if (args.length > 1)
-                throw new Exception("Too much files given to compile...");
+                throw new PlicException("Too much files given to compile...");
             if (args.length < 1)
-                throw new Exception("No file given to compile...");
+                throw new PlicException("No file given to compile...");
 
             final String path = args[0];
             if (!path.endsWith(".plic"))
-                throw new Exception("Wrong type of file given. Expected '.plic'.");
+                throw new PlicException("Wrong type of file given. Expected '.plic'.");
 
             ArrayList<Token> tokens = new Lexer(path).lex();
             SyntaxTree ast = new Parser(tokens).parse();
@@ -34,9 +36,12 @@ public class PlicC {
 
             MIPSGenerator.symbols.append(syms);
             System.out.println(ast.generateMIPS(new StringBuilder(), 0));
-        } catch (Exception e) {
+        } catch (LexerException | ParserException | PlicException e) {
             System.err.printf("ERREUR: %s\n", e.getMessage());
             System.exit(1);
+        } catch (Exception e) {
+            System.err.printf("ERREUR: native exception: %s (something is probably not handled correctly)", e.toString());
+            System.exit(2);
         }
     }
 }
