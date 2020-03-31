@@ -1,0 +1,20 @@
+programme negationBooleenne {
+    entier x ;
+    entier y ;
+    entier w ;
+
+    x := 7 ;
+    y := 2 ;
+
+    lire w ;
+
+    si ( x # w )
+    alors {
+        w := x ;
+    }
+    sinon {
+        w := w - 5 ;
+    }
+
+    ecrire w ;
+}

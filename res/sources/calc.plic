@@ -1,5 +1,6 @@
 programme calc {
     entier x ;
+    entier w ;
 
     x := ( ( 1 +
            ( w * 9 ) // = 0 si w = 0
