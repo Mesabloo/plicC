@@ -16,9 +16,10 @@ public class InstructionParsec implements Parsec<InstructionNode> {
     public Product<Reader, Either<ParseError<Token, Reader>, InstructionNode>> apply(Reader reader) {
         return (new OutputParsec().fmap(def -> (InstructionNode) def))
             .orElse(new InputParsec().fmap(in -> (InstructionNode) in))
-            .orElse(new DefinitionParsec().fmap(def -> (InstructionNode) def))
             .orElse(new ConditionParsec().fmap(cond -> (InstructionNode) cond))
             .orElse(new WhileParsec().fmap(w -> (InstructionNode) w))
+            .orElse(new ForEachParsec().fmap(foreach -> (InstructionNode) foreach))
+            .orElse(new DefinitionParsec().fmap(def -> (InstructionNode) def))
             .parse(reader);
     }
 }

@@ -23,7 +23,7 @@ public class KeywordLexer implements Lexec<Token> {
     @Override
     public Product<Reader, Either<ParseError<Character, Reader>, Token>> apply(Reader reader) {
         return
-            (String_.string("programme")
+            (String_.string("programme").try_()
                 .orElse(String_.string("ecrire").try_())
                 .orElse(String_.string("entier").try_())
                 .orElse(String_.string("et"))
@@ -35,6 +35,8 @@ public class KeywordLexer implements Lexec<Token> {
                 .orElse(String_.string("si"))
                 .orElse(String_.string("alors"))
                 .orElse(String_.string("lire"))
+                .orElse(String_.string("pour"))
+                .orElse(String_.string("dans"))
                 .orElse(String_.string("repeter"))
                 .orElse(Parseable.empty())
             )

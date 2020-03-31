@@ -35,6 +35,7 @@ public class SymbolLexer implements Lexec<Token> {
                 .orElse(String_.string(">"))
                 .orElse(String_.string("="))
                 .orElse(String_.string("#"))
+                .orElse(String_.string(".."))
                 .orElse(Parseable.empty())
             ).bind(sym -> Parseable.<Character, Reader>lineNumber()
                 .fmap(line -> new SymbolToken(line, sym)))
